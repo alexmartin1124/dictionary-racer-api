@@ -11,10 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615200733) do
+ActiveRecord::Schema.define(version: 20160615205759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "entries", force: :cascade do |t|
+    t.string   "word"
+    t.text     "definition"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "puzzle_entries", force: :cascade do |t|
+    t.integer  "puzzle_id"
+    t.integer  "entry_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entry_id"], name: "index_puzzle_entries_on_entry_id", using: :btree
+    t.index ["puzzle_id"], name: "index_puzzle_entries_on_puzzle_id", using: :btree
+  end
 
   create_table "puzzles", force: :cascade do |t|
     t.string   "start_word"
@@ -43,6 +59,8 @@ ActiveRecord::Schema.define(version: 20160615200733) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "puzzle_entries", "entries"
+  add_foreign_key "puzzle_entries", "puzzles"
   add_foreign_key "user_puzzles", "puzzles"
   add_foreign_key "user_puzzles", "users"
 end
