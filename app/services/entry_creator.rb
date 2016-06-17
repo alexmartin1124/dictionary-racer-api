@@ -10,21 +10,11 @@ class EntryCreator
     null = nil
     definitions = call_dictionary
     if definitions["results"]
-      definition = definitions["results"].find {|definition| definition["part_of_speech"] == "noun" && definition["senses"] && definition["senses"][0]["definition"]}
-      if definition
-        Entry.create!(word: word, definition: definition['senses'][0]['definition'][0])
-        puts "#{word} got created" 
-      else
-        puts "#{word} didn't get created" 
-      end
+      definition = definitions["results"].find {|definition| definition["part_of_speech"] && definition["senses"] && definition["senses"][0]["definition"]}
+      Entry.create!(word: word, definition: definition['senses'][0]['definition'][0]) if definition
     else
-      definition = definitions[:results].find {|definition| definition[:part_of_speech] == "noun" && definition[:senses][0][:definition]}
-      if definition
-        Entry.create!(word: word, definition: definition[:senses][0][:definition][0])
-        puts "#{word} got created" 
-      else
-        puts "#{word} didn't get created" 
-      end
+      definition = definitions[:results].find {|definition| definition[:part_of_speech] && definition[:senses][0][:definition]}
+      Entry.create!(word: word, definition: definition[:senses][0][:definition][0]) if definition
     end
   end
 

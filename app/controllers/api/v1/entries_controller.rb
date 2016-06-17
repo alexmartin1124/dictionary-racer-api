@@ -7,6 +7,7 @@ module Api
           value = params[:filter].values[0]
           # conditional to add missing words to nounlist
           entry = Entry.find_by(key => value)
+          entry = EntryCreator.new(value).create_entry if !entry && key == 'word'
           splitdef = entry.definition.gsub(/[^a-zA-Z0-9 ]/, "")
           entry.definition = splitdef
           entry.save
