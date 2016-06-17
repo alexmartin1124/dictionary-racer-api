@@ -6,4 +6,5 @@ Rails.application.routes.draw do
       resources :entries
     end
   end
+  post '/login', to: 'sessions#create'
 end
