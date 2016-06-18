@@ -2,6 +2,7 @@ class ApplicationController < ActionController::API
   before_action :authenticate
 
   def logged_in?
+    # binding.pry
     !!current_user
   end
 

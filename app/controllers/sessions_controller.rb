@@ -3,13 +3,12 @@ class SessionsController < ApplicationController
   skip_before_action :authenticate
 
   def create
-    binding.pry
     user = User.find_by(email: auth_params[:email])
     if user.authenticate(auth_params[:password])
       jwt = Auth.issue({user: user.id})
       render json: {jwt: jwt}
     else
-      binding.pry
+      # binding.pry
       render json: {you: 'fucked_up'}
     end
   end
