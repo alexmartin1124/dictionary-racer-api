@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :puzzles
       resources :users
       get '/users/current-user', to: 'current_user#show'
+      post '/users', to: 'users#create'
       resources :entries
     end
   end
