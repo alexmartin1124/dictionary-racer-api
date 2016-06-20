@@ -26,13 +26,13 @@ module DictionaryRacerApi
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
-    config.autoload_paths << Rails.root.join("lib")
     config.api_only = true
+    config.autoload_paths << Rails.root.join("lib")
     config.active_record.raise_in_transactional_callbacks = true
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :options, :patch, :delete, :head, :put]
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
       end
     end
   end
