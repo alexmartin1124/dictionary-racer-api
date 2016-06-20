@@ -1,4 +1,3 @@
-require_relative '/lib/auth.rb'
 class SessionsController < ApplicationController
 
   skip_before_action :authenticate
@@ -18,6 +17,28 @@ class SessionsController < ApplicationController
 
   def auth_params
     params.require(:auth).permit(:username, :email, :password)
+  end
+
+end
+
+require 'jwt'
+
+class Auth
+
+  ALGORITHM = 'HS256'
+
+  def self.issue(payload)
+    JWT.encode(payload, auth_secret, ALGORITHM)
+  end
+
+  def self.decode(token)
+    JWT.decode(token, auth_secret, false, {algorithm: ALGORITHM}).first
+  end
+
+private
+
+  def self.auth_secret
+    ENV["AUTH_SECRET"]
   end
 
 end
