@@ -2,8 +2,6 @@
 
 require_relative 'config/environment'
 
-run Rails.application
-
 use Rack::Cors do
   allow do
     origins 'localhost:3000/api/v1', '127.0.0.1:3000',
@@ -24,3 +22,6 @@ use Rack::Cors do
     resource '/public/*', :headers => :any, :methods => :get
   end
 end
+
+
+run Rails.application
