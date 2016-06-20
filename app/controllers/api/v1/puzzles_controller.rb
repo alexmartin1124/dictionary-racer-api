@@ -4,6 +4,10 @@ module Api
       def index
         render json: Puzzle.includes(:entries, :users), include: ["entries", "users"]
       end
+
+      def update
+        binding.pry
+      end
     end
   end
 end
