@@ -25,5 +25,3 @@ end
 
 
 run Rails.application
-
-
