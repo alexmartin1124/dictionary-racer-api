@@ -10,13 +10,13 @@ puzzle2 = Puzzle.create(start_word: "weed", end_word: "skill", best_path: ["weed
 
 puzzle1.best_path.each do |w|
   e = Entry.find_by(word: w)
-  e = EntryCreator.new(e).create_entry unless e
+  e = EntryCreator.new(w).create_entry unless e
   puzzle1.entries << e
 end
 
 puzzle2.best_path.each do |w|
   e = Entry.find_by(word: w)
-  e = EntryCreator.new(e).create_entry unless e
+  e = EntryCreator.new(w).create_entry unless e
   puzzle1.entries << e
 end
 

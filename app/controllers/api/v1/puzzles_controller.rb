@@ -5,26 +5,21 @@ module Api
         render json: Puzzle.includes(:entries, :users), include: ["entries", "users"]
       end
 
-
       def create
         start_word = puzzle_params["start-word"]
         end_word = puzzle_params["end-word"]
-        entries = [start_word, end_word]
-        entries.map! do |word|
-          if Entry.find_by(word: word)
-            Entry.find_by(word: word)
-          else
-            EntryCreator.new(word).create_entry
-          end
-        end
         puzzle = Puzzle.new(start_word: start_word, end_word: end_word)
-        entries.each{|entry| puzzle.entries << entry}
-        puzzle.users << current_user
-        if puzzle.save
-          render json: puzzle
-        else
-          render json: {error: "Invalid puzzle."}
+        [start_word, end_word].each do |word| 
+          puzzle.entries << (Entry.find_by(word: word) || EntryCreator.new(word).create_entry)
         end
+        puzzle.users << current_user
+        render json: puzzle if puzzle.save
+      end
+
+      def update
+        puzzle = Puzzle.find(params[:id])
+        puzzle.best_path = params["data"]["attributes"]["best-path"]
+        render json: puzzle if puzzle.save  
       end
 
     private
