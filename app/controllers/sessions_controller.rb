@@ -22,8 +22,6 @@ class SessionsController < ApplicationController
 
 end
 
-require 'jwt'
-
 class Auth
 
   ALGORITHM = 'HS256'
