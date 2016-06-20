@@ -1,4 +1,4 @@
-require_relative '../lib/auth'
+require_relative '/lib/auth'
 class SessionsController < ApplicationController
 
   skip_before_action :authenticate
