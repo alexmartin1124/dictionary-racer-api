@@ -36,9 +36,9 @@ ActiveRecord::Schema.define(version: 20160615205759) do
     t.string   "start_word"
     t.string   "end_word"
     t.string   "difficulty"
-    t.string   "best_path",               array: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "best_path",  default: [],              array: true
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "user_puzzles", force: :cascade do |t|
