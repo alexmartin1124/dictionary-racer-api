@@ -23,6 +23,7 @@ gem 'rest-client'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'rack-cors'
 gem 'jwt'
+gem 'mw_dictionary_api'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry-rails'

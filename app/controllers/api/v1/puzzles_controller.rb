@@ -10,7 +10,8 @@ module Api
         end_word = puzzle_params["end-word"]
         puzzle = Puzzle.new(start_word: start_word, end_word: end_word)
         [start_word, end_word].each do |word| 
-          puzzle.entries << (Entry.find_by(word: word) || EntryCreator.new(word).create_entry)
+          word.gsub!(/[^A-Za-z]/, '')
+          puzzle.entries << (Entry.find_by(word: word) || EntryCreator.create_entry(word))
         end
         puzzle.users << current_user
         render json: puzzle if puzzle.save
