@@ -20,6 +20,13 @@ module Api
       def update
         puzzle = Puzzle.find(params[:id])
         puzzle.best_path = params["data"]["attributes"]["best-path"]
+        if puzzle.best_path.count <= 5
+          puzzle.difficulty = 'easy'
+        elsif puzzle.best_path.count <= 10
+          puzzle.difficulty = 'medium'
+        else
+          puzzle.difficulty = 'hard'
+        end
         render json: puzzle if puzzle.save  
       end
 
