@@ -1,3 +1,4 @@
+binding.pry
 alex = User.create(username: "alex", email: "alex@dictionaryracer.com", password: "password", password_confirmation: "password")
 jj = User.create(username: "jj", email: "jj@dictionaryracer.com", password: "password", password_confirmation: "password")
 
